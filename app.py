@@ -1,45 +1,18 @@
-def add(x, y):
-    return x + y
+from flask import Flask, render_template, request
 
-def subtract(x, y):
-    return x - y
+app = Flask(__name__)
 
-def multiply(x, y):
-    return x * y
-
-def divide(x, y):
-    if y == 0:
-        return "Error: Division by zero"
-    return x / y
-
+@app.route("/", methods=["GET", "POST"])
 def calculator():
-    print("Select operation:")
-    print("1. Add")
-    print("2. Subtract")
-    print("3. Multiply")
-    print("4. Divide")
+    result = ""
+    if request.method == "POST":
+        try:
+            num1 = float(request.form["num1"])
+            num2 = float(request.form["num2"])
+            operation = request.form["operation"]
 
-    choice = input("Enter choice (1/2/3/4): ")
-
-    if choice not in ('1', '2', '3', '4'):
-        print("Invalid input")
-        return
-
-    try:
-        num1 = float(input("Enter first number: "))
-        num2 = float(input("Enter second number: "))
-    except ValueError:
-        print("Invalid number input")
-        return
-
-    if choice == '1':
-        print(f"Result: {add(num1, num2)}")
-    elif choice == '2':
-        print(f"Result: {subtract(num1, num2)}")
-    elif choice == '3':
-        print(f"Result: {multiply(num1, num2)}")
-    elif choice == '4':
-        print(f"Result: {divide(num1, num2)}")
-
-if __name__ == "__main__":
-    calculator()
+            if operation == "add":
+                result = num1 + num2
+            elif operation == "subtract":
+                result = num1 - num2
+            elif operation ==
